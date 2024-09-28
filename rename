@@ -1,0 +1,44 @@
+#!/bin/bash
+
+cd x86_64/
+
+repo-add ncos.db.tar.gz *.pkg.tar.zst
+
+rm ncos.db
+rm ncos.files
+
+# Define the old and new filenames for both files
+old_file1="ncos.db.tar.gz"
+new_file1="ncos.db"
+
+old_file2="ncos.files.tar.gz"
+new_file2="ncos.files"
+
+# Check if the first old file exists
+if [ ! -f "$old_file1" ]; then
+    echo "Error: File '$old_file1' does not exist."
+    exit 1
+fi
+
+# Check if the second old file exists
+if [ ! -f "$old_file2" ]; then
+    echo "Error: File '$old_file2' does not exist."
+    exit 1
+fi
+
+# Rename the first file
+mv "$old_file1" "$new_file1"
+if [ $? -eq 0 ]; then
+    echo "File renamed successfully from '$old_file1' to '$new_file1'."
+else
+    echo "Error renaming file '$old_file1'."
+fi
+
+# Rename the second file
+mv "$old_file2" "$new_file2"
+if [ $? -eq 0 ]; then
+    echo "File renamed successfully from '$old_file2' to '$new_file2'."
+else
+    echo "Error renaming file '$old_file2'."
+fi
+
